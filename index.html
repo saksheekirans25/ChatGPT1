@@ -98,34 +98,38 @@
             margin-top: 10px;
             width: 100%;
         }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+        .recommended-items {
+            width: 100%;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .recommended-items h2 {
+            color: #8b0000;
+        }
+        .recommended-item {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Italian Restaurant</h1>
         <p>Order delicious Italian food online</p>
+        <input type="text" class="search-bar" placeholder="Search for a dish..." oninput="filterMenu(this.value)">
     </header>
     <div class="container">
-        <div class="menu">
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1565297716872-69c5e5b77f5c" alt="Margherita Pizza">
-                <h2>Margherita Pizza</h2>
-                <p>$10</p>
-                <button onclick="addToCart('Margherita Pizza', 10)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1600347770674-4d21511a01e0" alt="Spaghetti Carbonara">
-                <h2>Spaghetti Carbonara</h2>
-                <p>$12</p>
-                <button onclick="addToCart('Spaghetti Carbonara', 12)">Add to Cart</button>
-            </div>
-            <div class="menu-item">
-                <img src="https://images.unsplash.com/photo-1598138826660-f35e6fe47a7c" alt="Lasagna">
-                <h2>Lasagna</h2>
-                <p>$15</p>
-                <button onclick="addToCart('Lasagna', 15)">Add to Cart</button>
-            </div>
-            <!-- Add more menu items as needed -->
+        <div class="menu" id="menu">
+            <!-- Menu items will be dynamically added here -->
         </div>
         <div class="cart">
             <h2>Cart</h2>
@@ -136,8 +140,60 @@
         </div>
     </div>
 
+    <div class="recommended-items" id="recommended">
+        <h2>Most Liked Items</h2>
+        <!-- Recommended items will be dynamically added here -->
+    </div>
+
     <script>
+        let menuItems = [
+            { name: "Margherita Pizza", price: 10, image: "https://images.unsplash.com/photo-1565297716872-69c5e5b77f5c" },
+            { name: "Spaghetti Carbonara", price: 12, image: "https://images.unsplash.com/photo-1600347770674-4d21511a01e0" },
+            { name: "Lasagna", price: 15, image: "https://images.unsplash.com/photo-1598138826660-f35e6fe47a7c" },
+            // Add more menu items here
+            { name: "Ravioli", price: 14, image: "https://images.unsplash.com/photo-1587223252933-663b28cf8e9e" },
+            { name: "Bruschetta", price: 8, image: "https://images.unsplash.com/photo-1574297503043-11d9b58537cc" },
+            { name: "Tiramisu", price: 9, image: "https://images.unsplash.com/photo-1600267338935-ba8631c21dbd" },
+            { name: "Minestrone Soup", price: 10, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
+            { name: "Caprese Salad", price: 11, image: "https://images.unsplash.com/photo-1589450277822-1985d3e9be84" },
+            { name: "Chicken Parmesan", price: 16, image: "https://images.unsplash.com/photo-1579612054992-ec18cc98faaa" },
+            { name: "Cannoli", price: 7, image: "https://images.unsplash.com/photo-1560493676-04071c5f3861" }
+        ];
+
         let cartItems = [];
+
+        function renderMenu() {
+            const menuContainer = document.getElementById('menu');
+            menuContainer.innerHTML = '';
+            menuItems.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <h2>${item.name}</h2>
+                    <p>$${item.price}</p>
+                    <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+        }
+
+        function filterMenu(keyword) {
+            const filteredItems = menuItems.filter(item => item.name.toLowerCase().includes(keyword.toLowerCase()));
+            const menuContainer = document.getElementById('menu');
+            menuContainer.innerHTML = '';
+            filteredItems.forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <h2>${item.name}</h2>
+                    <p>$${item.price}</p>
+                    <button onclick="addToCart('${item.name}', ${item.price})">Add to Cart</button>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+        }
 
         function addToCart(itemName, itemPrice) {
             cartItems.push({ name: itemName, price: itemPrice });
@@ -174,6 +230,40 @@
             cartItems = [];
             renderCart();
         }
-    </script>
-</body>
-</html>
+
+        function getRecommendedItems() {
+            // For demonstration purposes, let's assume "likes" data for each item
+            const likesData = [
+                { name: "Margherita Pizza", likes: 25 },
+                { name: "Spaghetti Carbonara", likes: 18 },
+                { name: "Lasagna", likes: 15 },
+                { name: "Ravioli", likes: 10 },
+                { name: "Bruschetta", likes: 8 },
+                { name: "Tiramisu", likes: 20 },
+                { name: "Minestrone Soup", likes: 12 },
+                { name: "Caprese Salad", likes: 14 },
+                { name: "Chicken Parmesan", likes: 22 },
+                { name: "Cannoli", likes: 17 }
+            ];
+
+            likesData.sort((a, b) => b.likes - a.likes); // Sort by likes in descending order
+
+            const recommendedContainer = document.getElementById('recommended');
+            recommendedContainer.innerHTML = '';
+            const recommendedTitle = document.createElement('h2');
+            recommendedTitle.textContent = 'Most Liked Items';
+            recommendedContainer.appendChild(recommendedTitle);
+            likesData.slice(0, 3).forEach(item => {
+                const recommendedItem = document.createElement('div');
+                recommendedItem.className = 'recommended-item';
+                recommendedItem.innerHTML = `
+                    <p>${item.name}</p>
+                    <p>Likes: ${item.likes}</p>
+                `;
+                recommendedContainer.appendChild(recommendedItem);
+            });
+        }
+
+        renderMenu();
+        getRecommendedItems();
+    </script
