@@ -6,16 +6,19 @@
     <title>Italian Restaurant Online Ordering</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f7f7f7;
+            color: #333;
         }
         header {
-            background-color: #8b0000;
+            background-color: #cc0000;
             color: white;
             padding: 20px;
             text-align: center;
+            font-size: 28px;
+            font-weight: bold;
         }
         .container {
             max-width: 1200px;
@@ -27,49 +30,56 @@
             align-items: flex-start;
         }
         .menu-item {
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
             padding: 10px;
-            margin: 10px;
-            background-color: #fff;
+            margin: 20px;
+            background-color: white;
             width: 300px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
         .menu-item img {
             max-width: 100%;
-            border-radius: 5px;
+            border-radius: 10px;
             margin-bottom: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
         .menu-item h2, .menu-item p {
             margin: 0;
             text-align: center;
+            color: #cc0000;
         }
         .menu-item p {
             font-size: 18px;
-            color: #8b0000;
-            margin-bottom: 10px;
         }
         .menu-item button {
-            background-color: #8b0000;
+            background-color: #cc0000;
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 5px 10px;
+            padding: 10px 20px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .menu-item button:hover {
+            background-color: #b30000;
         }
         .cart {
             margin-top: 20px;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 5px;
+            background-color: white;
+            border-radius: 10px;
             width: 300px;
             align-self: flex-start;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         }
         .cart h2 {
             margin-bottom: 10px;
             text-align: center;
+            color: #cc0000;
         }
         .cart-items {
             list-style-type: none;
@@ -81,15 +91,19 @@
             margin-bottom: 10px;
         }
         .cart-item button {
-            background-color: #8b0000;
+            background-color: #cc0000;
             color: white;
             border: none;
             border-radius: 5px;
             padding: 5px 10px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cart-item button:hover {
+            background-color: #b30000;
         }
         .checkout-btn {
-            background-color: #8b0000;
+            background-color: #cc0000;
             color: white;
             border: none;
             border-radius: 5px;
@@ -97,6 +111,10 @@
             cursor: pointer;
             margin-top: 10px;
             width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .checkout-btn:hover {
+            background-color: #b30000;
         }
         .search-bar {
             width: 100%;
@@ -110,20 +128,31 @@
             text-align: center;
         }
         .recommended-items h2 {
-            color: #8b0000;
+            color: #cc0000;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
         .recommended-item {
             display: inline-block;
             margin: 10px;
             padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .recommended-item:hover {
+            transform: translateY(-5px);
+        }
+        .recommended-item p {
+            margin: 5px 0;
+            color: #cc0000;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Italian Restaurant</h1>
+        Italian Restaurant
         <p>Order delicious Italian food online</p>
         <input type="text" class="search-bar" placeholder="Search for a dish..." oninput="filterMenu(this.value)">
     </header>
@@ -147,17 +176,24 @@
 
     <script>
         let menuItems = [
-            { name: "Margherita Pizza", price: 10, image: "https://images.unsplash.com/photo-1565297716872-69c5e5b77f5c" },
-            { name: "Spaghetti Carbonara", price: 12, image: "https://images.unsplash.com/photo-1600347770674-4d21511a01e0" },
-            { name: "Lasagna", price: 15, image: "https://images.unsplash.com/photo-1598138826660-f35e6fe47a7c" },
-            // Add more menu items here
-            { name: "Ravioli", price: 14, image: "https://images.unsplash.com/photo-1587223252933-663b28cf8e9e" },
-            { name: "Bruschetta", price: 8, image: "https://images.unsplash.com/photo-1574297503043-11d9b58537cc" },
-            { name: "Tiramisu", price: 9, image: "https://images.unsplash.com/photo-1600267338935-ba8631c21dbd" },
-            { name: "Minestrone Soup", price: 10, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
-            { name: "Caprese Salad", price: 11, image: "https://images.unsplash.com/photo-1589450277822-1985d3e9be84" },
-            { name: "Chicken Parmesan", price: 16, image: "https://images.unsplash.com/photo-1579612054992-ec18cc98faaa" },
-            { name: "Cannoli", price: 7, image: "https://images.unsplash.com/photo-1560493676-04071c5f3861" }
+            { name: "Margherita Pizza", price: 10, image: "https://www.simplyrecipes.com/wp-content/uploads/2019/09/easy-pizza-dough-lead-4-600x840.jpg" },
+            { name: "Spaghetti Carbonara", price: 12, image: "https://www.seriouseats.com/thmb/jkrR01jAQUZVOj54eNqPVsQtfY8=/1500x844/filters:no_upscale():max_bytes(150000):strip_icc()/20190327-spaghetti-carbonara-vicky-wasik-23-1500x1125-190d11e05e9f4fb2bca1ad8a62cb6e3d.jpg" },
+            { name: "Lasagna", price: 15, image: "https://www.simplyrecipes.com/wp-content/uploads/2018/11/Lasagna-LEAD-4-600x840.jpg" },
+            { name: "Ravioli", price: 14, image: "https://www.simplyrecipes.com/wp-content/uploads/2021/08/Ravioli-Lead-3-600x840.jpg" },
+            { name: "Bruschetta", price: 8, image: "https://www.simplyrecipes.com/wp-content/uploads/2008/01/Bruschetta-Lead-5-600x840.jpg" },
+            { name: "Tiramisu", price: 9, image: "https://www.simplyrecipes.com/wp-content/uploads/2011/11/tiramisu-horiz-a-1600-600x840.jpg" },
+            { name: "Minestrone Soup", price: 10, image: "https://www.simplyrecipes.com/wp-content/uploads/2018/10/Minestrone-Soup-LEAD-3-600x840.jpg" },
+            { name: "Caprese Salad", price: 11, image: "https://www.simplyrecipes.com/wp-content/uploads/2020/07/caprese-salad-lead-1-600x840.jpg" },
+            { name: "Chicken Parmesan", price: 16, image: "https://www.simplyrecipes.com/wp-content/uploads/2013/09/chicken-parm-horiz-a-1600-600x840.jpg" },
+            { name: "Cannoli", price: 7, image: "https://www.simplyrecipes.com/wp-content/uploads/2006/09/cannoli-horiz-a-1600-600x840.jpg" },
+            { name: "Garlic Bread", price: 6, image: "https://www.simplyrecipes.com/wp-content/uploads/2019/12/cheesy-garlic-bread-horiz-a-1600-600x840.jpg" },
+            { name: "Fettuccine Alfredo", price: 13, image: "https://www.simplyrecipes.com/wp-content/uploads/2019/01/Fettuccine-Alfredo-LEAD-4-600x840.jpg" },
+            { name: "Italian Wedding Soup", price: 11, image: "https://www.simplyrecipes.com/wp-content/uploads/2017/11/Italian-Wedding-Soup-LEAD-HORIZONTAL-600x840.jpg" },
+            { name: "Calzone", price: 12, image: "https://www.simplyrecipes.com/wp-content/uploads/2021/10/Calzones-LEAD-3-600x840.jpg" },
+            { name: "Cacio e Pepe", price: 13, image: "https://www.simplyrecipes.com/wp-content/uploads/2016/12/cacio-e-pepe-horiz-a-1600-600x840.jpg" },
+            { name: "Panna Cotta", price: 8, image: "https://www.simplyrecipes.com/wp-content/uploads/2016/06/Panna-Cotta-LEAD-2-600x840.jpg" },
+            { name: "Prosciutto-Wrapped Asparagus", price: 10, image: "https://www.simplyrecipes.com/wp-content/uploads/2019/05/Prosciutto-Wrapped-Asparagus-LEAD-2-600x840.jpg" },
+            { name: "Lemon Risotto", price: 12, image: "https://www.simplyrecipes.com/wp-content/uploads/2012/04/lemon-risotto-horiz-a-1600-600x840.jpg" }
         ];
 
         let cartItems = [];
@@ -266,4 +302,6 @@
 
         renderMenu();
         getRecommendedItems();
-    </script
+    </script>
+</body>
+</html>
