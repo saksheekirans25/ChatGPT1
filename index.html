@@ -3,251 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Campus CookBook</title>
+    <title>Italian Restaurant Online Ordering</title>
     <style>
         body {
-            font-family: Arial, serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
         }
         header {
-            background-color: #d1768f;
+            background-color: #8b0000;
             color: white;
-            padding: 5px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-        nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-left: 20px;
-        }
-        .search-bar {
-            display: flex;
-            align-items: center;
-        }
-        .search-bar input[type="text"],
-        .search-bar button {
-            margin-right: 10px;
-            padding: 8px;
-            border: none;
-            border-radius: 5px;
-        }
-        .header {
-            background-image: url("https://www.joyfulhealthyeats.com/wp-content/uploads/2022/08/Green-Goddess-Salad-Recipe-web-6.jpg");
-            background-size: cover;
-            background-position: center;
-            color: white;
-            text-align: center;
-            padding: 150px 20px; /* Increased padding */
-            position: relative;
-        }
-        .header-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.3); /* Adjusted overlay transparency */
-        }
-        .header-content {
-            position: relative;
-            z-index: 1;
-        }
-        .header-text {
-            font-family: 'Pacifico', cursive;
-            font-size: 48px; /* Increased font size */
-            margin-bottom: 20px;
-        }
-        .body-section {
-            background-color: #f5f5f5;
-            padding: 50px 0;
+            padding: 20px;
             text-align: center;
         }
-        .recipe-container {
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
+            align-items: flex-start;
         }
-        .recipe {
-            flex: 10px;
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .recipe img {
-            width: 100%;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            filter: brightness(100%);
-        }
-        footer {
-            background-color: #d1768f;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .hamburger-menu {
-            position: relative;
-            margin-right: 20px;
-            cursor: pointer;
-        }
-        .hamburger-icon {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            position: absolute;
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-        .hamburger-icon::before,
-        .hamburger-icon::after {
-            content: '';
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            position: absolute;
-            transition: transform 0.3s ease;
-        }
-        .hamburger-icon::before {
-            top: -6px;
-        }
-        .hamburger-icon::after {
-            top: 6px;
-        }
-        .hamburger-menu:hover .hamburger-icon::before {
-            transform: translateY(6px) rotate(45deg);
-        }
-        .hamburger-menu:hover .hamburger-icon::after {
-            transform: translateY(-6px) rotate(-45deg);
-        }
-        .menu-items {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #f5f5f5;
-            padding: 10px;
+        .menu-item {
             border: 1px solid #ccc;
             border-radius: 5px;
-            display: none;
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
-        .menu-items a {
-            display: block;
-            margin-bottom: 5px;
-            text-decoration: none;
-            color: #333;
-            font-size: 14px;
+        .menu-item img {
+            max-width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
-        .recipe .recipe-image {
-    width: 100%;
-    height: 400px; /* Adjust height as needed */
-    object-fit: cover;
-    border-radius: 10px;
-}
-
+        .menu-item h2, .menu-item p {
+            margin: 0;
+            text-align: center;
+        }
+        .menu-item p {
+            font-size: 18px;
+            color: #8b0000;
+            margin-bottom: 10px;
+        }
+        .menu-item button {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            width: 300px;
+            align-self: flex-start;
+        }
+        .cart h2 {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .cart-items {
+            list-style-type: none;
+            padding: 0;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .cart-item button {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .checkout-btn {
+            background-color: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-<header>
-    <div class="logo">
-        <span style="font-family: 'Pacifico', cursive; font-size: 36px;">The Campus CookBook</span>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Search...">
-        <button>Search</button>
-    </div>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Recipes</a></li>
-            <li><a href="#">About Us</a></li>
-        </ul>
-    </nav>
-    <div class="hamburger-menu" onclick="toggleMenu()">
-        <div class="hamburger-icon"></div>
-        <div class="menu-items" id="menuItems" style="display: none;">
-            <a href="#">Login</a>
-            <a href="#">Register</a>
-            <a href="#">Help</a>
+    <header>
+        <h1>Italian Restaurant</h1>
+        <p>Order delicious Italian food online</p>
+    </header>
+    <div class="container">
+        <div class="menu">
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1565297716872-69c5e5b77f5c" alt="Margherita Pizza">
+                <h2>Margherita Pizza</h2>
+                <p>$10</p>
+                <button onclick="addToCart('Margherita Pizza', 10)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1600347770674-4d21511a01e0" alt="Spaghetti Carbonara">
+                <h2>Spaghetti Carbonara</h2>
+                <p>$12</p>
+                <button onclick="addToCart('Spaghetti Carbonara', 12)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <img src="https://images.unsplash.com/photo-1598138826660-f35e6fe47a7c" alt="Lasagna">
+                <h2>Lasagna</h2>
+                <p>$15</p>
+                <button onclick="addToCart('Lasagna', 15)">Add to Cart</button>
+            </div>
+            <!-- Add more menu items as needed -->
+        </div>
+        <div class="cart">
+            <h2>Cart</h2>
+            <ul class="cart-items">
+                
+            </ul>
+            <button class="checkout-btn" onclick="checkout()">Checkout</button>
         </div>
     </div>
-</header>
 
-<div class="header">
-    <div class="header-overlay"></div>
-    <div class="header-content">
-        <h1 class="header-text">The Campus CookBook</h1>
-        <p style="font-size: 20px;">Quick, Easy, Healthy Recipes for College Students</p>
-    </div>
-</div>
+    <script>
+        let cartItems = [];
 
-<div class="body-section">
-    <h2>Recommended For You</h2>
-    <div class="recipe-container">
-    <div class="recipe">
-    <img class="recipe-image" src="https://cdn.loveandlemons.com/wp-content/uploads/2021/05/scrambled-eggs.jpg" alt="Scrambled Eggs">
-    <h3>Scrambled Eggs</h3>
-    <p>Time to Prepare: 10 mins</p>
-    <p>Difficulty Level: Easy</p>
-    <p>Rating: ★★★★☆</p>
-</div>
-
-    <div class="recipe">
-        <img class ="recipe-image" src="https://deliciouslittlebites.com/wp-content/uploads/2018/03/Banana-Toast-Recipe-Image-3.jpg" alt="Peanut Butter Banana Toast">
-        <h3>Peanut Butter Banana Toast</h3>
-        <p>Time to Prepare: 5 mins</p>
-        <p>Difficulty Level: Very Easy</p>
-        <p>Rating: ★★★★☆</p>
-    </div>
-    <div class="recipe">
-        <img class ="recipe-image" src="https://www.beyondthechickencoop.com/wp-content/uploads/2023/05/Greek-Yogurt-Berry-Parfait-4.jpg" alt="Greek Yogurt Parfait">
-        <h3>Greek Yogurt Parfait</h3>
-        <p>Time to Prepare: 8 mins</p>
-        <p>Difficulty Level: Easy</p>
-        <p>Rating: ★★★☆☆</p>
-    </div>
-</div>
-</div>
-
-<footer>
-    <div class="about-us">
-        <h2>Welcome to The Campus CookBook!</h2>
-        <p>Our mission is to provide college students living away from home with easy, quick, and healthy recipes. Say goodbye to dining out every night and hello to delicious homemade meals that fit your busy student lifestyle.</p>
-    </div>
-    <div class="contact-info">
-        <h2>Contact Us</h2>
-        <p>Email: contact@thecampuscookbook.com</p>
-        <p>Phone: 123-456-7890</p>
-    </div>
-    <div class="social-media">
-        <h2>Follow Us</h2>
-        <a href="#">Facebook</a> | <a href="#">Twitter</a> | <a href="#">Instagram</a>
-    </div>
-</footer>
-
-<script>
-    function toggleMenu() {
-        var menu = document.getElementById("menuItems");
-        if (menu.style.display === "block") {
-            menu.style.display = "none";
-        } else {
-            menu.style.display = "block";
+        function addToCart(itemName, itemPrice) {
+            cartItems.push({ name: itemName, price: itemPrice });
+            renderCart();
         }
-    }
-</script>
 
+        function renderCart() {
+            const cartList = document.querySelector('.cart-items');
+            cartList.innerHTML = '';
+            let totalPrice = 0;
+            cartItems.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>$${item.price}</span>
+                    <button onclick="removeFromCart('${item.name}')">Remove</button>
+                `;
+                cartList.appendChild(li);
+                totalPrice += item.price;
+            });
+            const totalContainer = document.createElement('li');
+            totalContainer.innerHTML = `<strong>Total:</strong> $${totalPrice}`;
+            cartList.appendChild(totalContainer);
+        }
+
+        function removeFromCart(itemName) {
+            cartItems = cartItems.filter(item => item.name !== itemName);
+            renderCart();
+        }
+
+        function checkout() {
+            alert('Thank you for your order!');
+            cartItems = [];
+            renderCart();
+        }
+    </script>
 </body>
 </html>
